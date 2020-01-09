@@ -13,7 +13,7 @@ import androidx.lifecycle.ViewModelProviders
 import com.zaphlabs.filechooser.KnotFileChooser
 import com.zaphlabs.filechooser.Sorter
 
-class FileChooserFragment : Fragment() {
+class ReaderIntroFragment : Fragment() {
 
   private lateinit var choose: Button
   private lateinit var path: TextView
@@ -26,7 +26,7 @@ class FileChooserFragment : Fragment() {
     savedInstanceState: Bundle?
   ): View? {
     val layout =
-      inflater.inflate(R.layout.file_chooser, container, false)
+      inflater.inflate(R.layout.reader_intro, container, false)
 
     this.path =
       layout.findViewById(R.id.fileChooserPath)
@@ -44,7 +44,7 @@ class FileChooserFragment : Fragment() {
 
     val toolbarHost = (this.requireActivity() as ToolbarHostType)
     toolbarHost.toolbarClearMenu()
-    toolbarHost.toolbarSetTitleSubtitle("R2-Sandbox", "")
+    toolbarHost.toolbarSetTitleSubtitle("R2-Sandbox (Chooser)", "")
 
     this.readerModel =
       ViewModelProviders.of(this.requireActivity())
@@ -87,6 +87,10 @@ class FileChooserFragment : Fragment() {
           }
         }
         .show()
+    }
+
+    this.read.setOnClickListener {
+      (this.requireActivity() as NavigationControllerType).openReader()
     }
   }
 }

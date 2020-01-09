@@ -9,6 +9,7 @@
 
   <application
     android:icon="@mipmap/ic_launcher"
+    android:name="org.librarysimplified.r2_sandbox.app.MainApplication"
     tools:replace="android:label"
     android:label="@string/appName"
     android:theme="@style/SandboxTheme">

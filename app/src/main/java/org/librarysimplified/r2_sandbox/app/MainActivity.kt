@@ -6,8 +6,6 @@ import androidx.appcompat.widget.Toolbar
 
 class MainActivity : AppCompatActivity(), ToolbarHostType {
 
-  private lateinit var toolbar: Toolbar
-
   override fun findToolbar(): Toolbar {
     return this.findViewById(R.id.mainToolbar)
   }

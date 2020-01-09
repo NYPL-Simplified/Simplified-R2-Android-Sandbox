@@ -20,10 +20,6 @@ class FileChooserFragment : Fragment() {
   private lateinit var read: Button
   private lateinit var readerModel: ReaderViewModel
 
-  companion object {
-    const val requestCode = 1001
-  }
-
   override fun onCreateView(
     inflater: LayoutInflater,
     container: ViewGroup?,

@@ -1,0 +1,3 @@
+rootProject.name = 'r2_sandbox'
+
+include ':app'

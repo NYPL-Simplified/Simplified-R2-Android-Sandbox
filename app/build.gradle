@@ -1,0 +1,10 @@
+dependencies {
+  api libraries.androidXAppCompat
+  api libraries.androidXConstraintLayout
+  api libraries.androidXCore
+  api libraries.androidXLifecycle
+  api libraries.fileChooser
+  api libraries.kotlinStdlib
+  api libraries.r2Streamer
+  api libraries.rxjava2
+}

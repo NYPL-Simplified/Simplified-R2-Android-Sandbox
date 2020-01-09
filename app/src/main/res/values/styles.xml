@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<resources>
+  <color name="sandboxColorPrimaryLight">#5472d3</color>
+  <color name="sandboxColorPrimary">#0d47a1</color>
+  <color name="sandboxColorPrimaryDark">#002171</color>
+  <color name="sandboxColorDisabled">#dddddd</color>
+  <color name="sandboxColorBackground">#ffffff</color>
+
+  <style name="SandboxTheme" parent="Theme.AppCompat.Light.NoActionBar">
+    <item name="colorPrimary">@color/sandboxColorPrimary</item>
+    <item name="colorPrimaryDark">@color/sandboxColorPrimaryDark</item>
+    <item name="colorAccent">@color/sandboxColorPrimaryLight</item>
+    <item name="android:colorPrimary">@color/sandboxColorPrimary</item>
+    <item name="android:colorPrimaryDark">@color/sandboxColorPrimaryDark</item>
+    <item name="android:colorAccent">@color/sandboxColorPrimaryLight</item>
+    <item name="windowActionBar">false</item>
+    <item name="windowNoTitle">true</item>
+
+    <item name="kfc_theme_background">@color/sandboxColorBackground</item>
+    <item name="kfc_theme_foreground">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_title">@color/sandboxColorPrimaryLight</item>
+    <item name="kfc_theme_breadcrumb">@android:color/black</item>
+    <item name="kfc_theme_toolbox">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_search_text">@color/sandboxColorPrimaryLight</item>
+    <item name="kfc_theme_search_hint">@color/sandboxColorPrimaryLight</item>
+    <item name="kfc_theme_status">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_file_icon">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_file_name">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_file_information">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_file_flag">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_file_asterisk">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_checkbox">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_cancel_button">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_ok_button">@color/sandboxColorPrimary</item>
+    <item name="kfc_theme_create_folder_button">@color/sandboxColorPrimary</item>
+  </style>
+
+  <style name="SandboxToolbarStyle" parent="Widget.AppCompat.Toolbar">
+    <item name="titleTextAppearance">@style/SandboxTitleTextAppearance</item>
+    <item name="subtitleTextAppearance">@style/SandboxSubTitleTextAppearance</item>
+  </style>
+
+  <style name="SandboxTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Title">
+    <item name="android:textColor">#ffffff</item>
+    <item name="android:textSize">24sp</item>
+  </style>
+
+  <style name="SandboxSubTitleTextAppearance" parent="TextAppearance.Widget.AppCompat.Toolbar.Subtitle">
+    <item name="android:textColor">#ffffff</item>
+    <item name="android:textSize">11sp</item>
+  </style>
+
+</resources>

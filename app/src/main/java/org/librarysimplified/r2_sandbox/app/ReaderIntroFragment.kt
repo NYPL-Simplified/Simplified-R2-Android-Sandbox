@@ -13,6 +13,10 @@ import androidx.lifecycle.ViewModelProviders
 import com.zaphlabs.filechooser.KnotFileChooser
 import com.zaphlabs.filechooser.Sorter
 
+/**
+ * A fragment that allows for selecting a book from the device filesystem.
+ */
+
 class ReaderIntroFragment : Fragment() {
 
   private lateinit var choose: Button

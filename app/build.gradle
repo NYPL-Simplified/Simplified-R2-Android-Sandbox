@@ -7,9 +7,12 @@ dependencies {
   api libraries.fileChooser
   api libraries.googleGuava
   api libraries.kotlinStdlib
+  api libraries.nanoHTTPD
+  api libraries.nanoHTTPDNanolets
   api libraries.r2Navigator
   api libraries.r2Shared
   api libraries.r2Streamer
+  api libraries.rxjava2
   api libraries.slf4j
 
   api libraries.logbackAndroidCore

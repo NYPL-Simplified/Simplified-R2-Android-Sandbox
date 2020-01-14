@@ -94,7 +94,6 @@ class ReaderServer private constructor(
       this.logger.debug("loading readium resources")
       server.loadReadiumCSSResources(context.assets)
       server.loadR2ScriptResources(context.assets)
-      server.loadR2FontResources(context.assets, context)
 
       this.logger.debug("loading epub into server")
       val epubName = "/${file.name}"
@@ -120,11 +119,13 @@ class ReaderServer private constructor(
     return buildString {
       this.append("http://127.0.0.1:")
       this.append(this@ReaderServer.port)
-      this.append("/")
       this.append(this@ReaderServer.epubFileName)
 
-      // XXX: This is absolutely NOT safe, but for the sake of keeping the sample app terse...
-      this.append(this@ReaderServer.publication.readingOrder[0].href!!)
+      val publication = this@ReaderServer.publication
+      val firstItem = publication.readingOrder.firstOrNull()?.href
+      if (firstItem != null) {
+        this.append(firstItem)
+      }
     }
   }
 }

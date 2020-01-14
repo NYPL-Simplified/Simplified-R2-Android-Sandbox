@@ -25,6 +25,8 @@ class ReaderViewerFragment : Fragment() {
 
   private lateinit var readerModel: ReaderViewModel
   private lateinit var webView: R2WebView
+  private lateinit var webViewClient: ReaderWebViewClient
+  private lateinit var webChromeClient: ReaderWebChromeClient
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -34,9 +36,12 @@ class ReaderViewerFragment : Fragment() {
     val layout =
       inflater.inflate(R.layout.reader_viewer, container, false)
 
-    this.webView =
-      layout.findViewById(R.id.viewerWebView)
+    this.webViewClient = ReaderWebViewClient()
+    this.webChromeClient = ReaderWebChromeClient()
 
+    this.webView = layout.findViewById(R.id.viewerWebView)
+    this.webView.webViewClient = this.webViewClient
+    this.webView.webChromeClient = this.webChromeClient
     return layout
   }
 

@@ -78,6 +78,8 @@ class ReaderServer private constructor(
       context: Context,
       file: File
     ): ReaderServerType {
+      this.logger.debug("exists: ${file.exists()}")
+      this.logger.debug("isDir: ${file.isDirectory()}")
       val box =
         EpubParser().parse(file.absolutePath)
           ?: throw IOException("Failed to parse EPUB")

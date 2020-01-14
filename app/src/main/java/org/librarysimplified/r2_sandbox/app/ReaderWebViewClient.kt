@@ -18,6 +18,9 @@ class ReaderWebViewClient : WebViewClient() {
     url: String
   ) {
     this.logger.debug("onLoadResource: {}", url)
+    if (url.contains("favicon.ico")) {
+      return
+    }
     super.onLoadResource(view, url)
   }
 

@@ -20,6 +20,10 @@ class ServerTest {
       EpubParser().parse(file.absolutePath)
         ?: throw IOException("Failed to parse epub ${file}")
 
+    for (item in pubBox.publication.readingOrder) {
+      println("${item.href}")
+    }
+
     val server = Server(8080)
     server.start(5_000)
     server.addEpub(pubBox.publication, pubBox.container, "/${file.name}", null)

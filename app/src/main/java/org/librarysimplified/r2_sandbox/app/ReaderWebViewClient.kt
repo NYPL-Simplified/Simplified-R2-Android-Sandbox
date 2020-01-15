@@ -10,17 +10,36 @@ import org.slf4j.LoggerFactory
 
 class ReaderWebViewClient : WebViewClient() {
 
+  companion object {
+    val emptyResponse = WebResourceResponse(
+        "text/plain",
+        "utf-8",
+        404,
+        "Not Found",
+        null,
+        null
+    )
+  }
+
   private val logger =
     LoggerFactory.getLogger(ReaderWebViewClient::class.java)
+
+  override fun shouldInterceptRequest(view: WebView?, request: WebResourceRequest?): WebResourceResponse? {
+    if (request != null) {
+      val url = request.url.toString()
+
+      if (url.endsWith("favicon.ico")) {
+        return emptyResponse
+      }
+    }
+    return super.shouldInterceptRequest(view, request)
+  }
 
   override fun onLoadResource(
     view: WebView,
     url: String
   ) {
     this.logger.debug("onLoadResource: {}", url)
-    if (url.contains("favicon.ico")) {
-      return
-    }
     super.onLoadResource(view, url)
   }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -24,7 +25,7 @@ class ReaderViewerFragment : Fragment() {
     LoggerFactory.getLogger(ReaderViewerFragment::class.java)
 
   private lateinit var readerModel: ReaderViewModel
-  private lateinit var webView: R2WebView
+  private lateinit var webView: WebView
   private lateinit var webViewClient: ReaderWebViewClient
   private lateinit var webChromeClient: ReaderWebChromeClient
 

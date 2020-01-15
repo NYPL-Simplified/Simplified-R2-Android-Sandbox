@@ -15,6 +15,9 @@ dependencies {
   api libraries.rxjava2
   api libraries.slf4j
 
+  testApi libraries.junit
+  testApi libraries.kxml
+
   api libraries.logbackAndroidCore
   api(libraries.logbackAndroidClassic) {
     // https://github.com/tony19/logback-android/issues/73

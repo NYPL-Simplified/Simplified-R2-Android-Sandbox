@@ -28,7 +28,7 @@ class ServerTest {
     server.start(5_000)
     server.addEpub(pubBox.publication, pubBox.container, "/${file.name}", null)
 
-    val targetURL = URL("http://127.0.0.1:8080/epub/text/chapter-1.xhtml")
+    val targetURL = URL("http://127.0.0.1:8080/${pubBox.publication.readingOrder[0].href}")
     val bytes = targetURL.openStream().readBytes()
     Assert.assertTrue(bytes.isNotEmpty())
   }

@@ -6,4 +6,8 @@
   <string name="fileSelectTitle">Please select an EPUB file.</string>
   <string name="fileChoose">Choose file</string>
   <string name="fileRead">Read file</string>
+  <string name="pagePrevious">← Page</string>
+  <string name="pageNext">Page →</string>
+  <string name="filePrevious">← File</string>
+  <string name="fileNext">File →</string>
 </resources>

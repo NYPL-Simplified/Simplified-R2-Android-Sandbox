@@ -28,6 +28,9 @@ class ReaderViewModel : ViewModel() {
   val server: MutableLiveData<ReaderServerType?> =
     MutableLiveData()
 
+  var chapterIndex: MutableLiveData<Int> =
+    MutableLiveData(0)
+
   override fun onCleared() {
     super.onCleared()
 

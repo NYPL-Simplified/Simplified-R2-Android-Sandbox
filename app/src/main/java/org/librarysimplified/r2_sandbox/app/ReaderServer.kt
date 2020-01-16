@@ -18,7 +18,7 @@ import java.util.concurrent.atomic.AtomicBoolean
 class ReaderServer private constructor(
   override val port: Int,
   private val server: Server,
-  private val publication: Publication,
+  override val publication: Publication,
   private val container: Container,
   private val epubFileName: String
 ) : ReaderServerType {
@@ -94,6 +94,7 @@ class ReaderServer private constructor(
       this.logger.debug("loading readium resources")
       server.loadReadiumCSSResources(context.assets)
       server.loadR2ScriptResources(context.assets)
+      server.loadR2FontResources(context.assets, context)
 
       this.logger.debug("loading epub into server")
       val epubName = "/${file.name}"
@@ -115,14 +116,14 @@ class ReaderServer private constructor(
     }
   }
 
-  override fun startingLocation(): String {
+  override fun locationOfSpineItem(index: Int): String {
     return buildString {
       this.append("http://127.0.0.1:")
       this.append(this@ReaderServer.port)
       this.append(this@ReaderServer.epubFileName)
 
       val publication = this@ReaderServer.publication
-      val firstItem = publication.readingOrder.firstOrNull()?.href
+      val firstItem = publication.readingOrder[index].href
       if (firstItem != null) {
         this.append(firstItem)
       }

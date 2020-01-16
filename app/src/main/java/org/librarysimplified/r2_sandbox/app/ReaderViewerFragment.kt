@@ -4,7 +4,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.ValueCallback
 import android.webkit.WebView
+import android.widget.Button
 import androidx.annotation.UiThread
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
@@ -12,7 +14,6 @@ import androidx.lifecycle.ViewModelProviders
 import com.google.common.base.Function
 import com.google.common.util.concurrent.FluentFuture
 import com.google.common.util.concurrent.MoreExecutors
-import org.readium.r2.navigator.R2WebView
 import org.slf4j.LoggerFactory
 
 /**
@@ -24,10 +25,15 @@ class ReaderViewerFragment : Fragment() {
   private val logger =
     LoggerFactory.getLogger(ReaderViewerFragment::class.java)
 
+  private lateinit var fileNext: Button
+  private lateinit var filePrevious: Button
+  private lateinit var jsAPI: ReaderJavascriptAPIType
+  private lateinit var pageNext: Button
+  private lateinit var pagePrevious: Button
   private lateinit var readerModel: ReaderViewModel
+  private lateinit var webChromeClient: ReaderWebChromeClient
   private lateinit var webView: WebView
   private lateinit var webViewClient: ReaderWebViewClient
-  private lateinit var webChromeClient: ReaderWebChromeClient
 
   override fun onCreateView(
     inflater: LayoutInflater,
@@ -37,12 +43,24 @@ class ReaderViewerFragment : Fragment() {
     val layout =
       inflater.inflate(R.layout.reader_viewer, container, false)
 
+    this.pagePrevious =
+      layout.findViewById(R.id.viewerPagePrevious)
+    this.pageNext =
+      layout.findViewById(R.id.viewerPageNext)
+    this.filePrevious =
+      layout.findViewById(R.id.viewerFilePrevious)
+    this.fileNext =
+      layout.findViewById(R.id.viewerFileNext)
+
     this.webViewClient = ReaderWebViewClient()
     this.webChromeClient = ReaderWebChromeClient()
 
     this.webView = layout.findViewById(R.id.viewerWebView)
+    this.webView.settings.javaScriptEnabled = true
     this.webView.webViewClient = this.webViewClient
     this.webView.webChromeClient = this.webChromeClient
+
+    this.jsAPI = ReaderJavascriptAPI(this.webView)
     return layout
   }
 
@@ -63,6 +81,11 @@ class ReaderViewerFragment : Fragment() {
       this.close()
       return
     }
+
+    /*
+     * Load the book asynchronously, and evaluate the given functions when the book either
+     * loads, or fails to load.
+     */
 
     val exec = MoreExecutors.directExecutor()
     FluentFuture.from(this.readerModel.openBook(activity, bookFile))
@@ -97,6 +120,33 @@ class ReaderViewerFragment : Fragment() {
     val startingLocation = server.startingLocation()
     this.logger.debug("opening starting location: {}", startingLocation)
     this.webView.loadUrl(startingLocation)
+
+    this.filePrevious.setOnClickListener {
+      val currentIndex =
+        this.readerModel.chapterIndex.value ?: 0
+      val newIndex =
+        Math.max(0, currentIndex - 1) % server.publication.readingOrder.size
+
+      this.readerModel.chapterIndex.postValue(newIndex)
+      this.webView.loadUrl(server.locationOfSpineItem(newIndex))
+    }
+
+    this.fileNext.setOnClickListener {
+      val currentIndex =
+        this.readerModel.chapterIndex.value ?: 0
+      val newIndex =
+        (currentIndex + 1) % server.publication.readingOrder.size
+
+      this.readerModel.chapterIndex.postValue(newIndex)
+      this.webView.loadUrl(server.locationOfSpineItem(newIndex))
+    }
+
+    this.pagePrevious.setOnClickListener {
+      this.jsAPI.scrollPrevious()
+    }
+    this.pageNext.setOnClickListener {
+      this.jsAPI.scrollNext()
+    }
   }
 
   private fun close() {

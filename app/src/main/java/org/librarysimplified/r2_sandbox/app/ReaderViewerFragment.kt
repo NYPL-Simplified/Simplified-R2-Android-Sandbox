@@ -2,9 +2,9 @@ package org.librarysimplified.r2_sandbox.app
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.webkit.ValueCallback
 import android.webkit.WebView
 import android.widget.Button
 import androidx.annotation.UiThread
@@ -28,6 +28,7 @@ class ReaderViewerFragment : Fragment() {
   private lateinit var fileNext: Button
   private lateinit var filePrevious: Button
   private lateinit var jsAPI: ReaderJavascriptAPIType
+  private lateinit var jsAPIReceiver: ReaderJavascriptAPIReceiver
   private lateinit var pageNext: Button
   private lateinit var pagePrevious: Button
   private lateinit var readerModel: ReaderViewModel
@@ -59,8 +60,19 @@ class ReaderViewerFragment : Fragment() {
     this.webView.settings.javaScriptEnabled = true
     this.webView.webViewClient = this.webViewClient
     this.webView.webChromeClient = this.webChromeClient
+    this.webView.isVerticalScrollBarEnabled = false
+    this.webView.isHorizontalScrollBarEnabled = false
+
+    /*
+     * Disable manual scrolling on the web view. Scrolling is controlled via the javascript API.
+     */
+
+    this.webView.setOnTouchListener { v, event ->
+      event.action == MotionEvent.ACTION_MOVE
+    }
 
     this.jsAPI = ReaderJavascriptAPI(this.webView)
+    this.jsAPIReceiver = ReaderJavascriptAPIReceiver(this.webView)
     return layout
   }
 
@@ -122,25 +134,11 @@ class ReaderViewerFragment : Fragment() {
     this.webView.loadUrl(startingLocation)
 
     this.filePrevious.setOnClickListener {
-      val currentIndex =
-        this.readerModel.chapterIndex.value ?: 0
-      val newIndex =
-        Math.max(0, currentIndex - 1) % server.publication.readingOrder.size
-
-      this.readerModel.chapterIndex.postValue(newIndex)
-      this.webView.loadUrl(server.locationOfSpineItem(newIndex))
+      this.webView.loadUrl(server.locationOfSpineItem(this.readerModel.findPreviousChapterIndex()))
     }
-
     this.fileNext.setOnClickListener {
-      val currentIndex =
-        this.readerModel.chapterIndex.value ?: 0
-      val newIndex =
-        (currentIndex + 1) % server.publication.readingOrder.size
-
-      this.readerModel.chapterIndex.postValue(newIndex)
-      this.webView.loadUrl(server.locationOfSpineItem(newIndex))
+      this.webView.loadUrl(server.locationOfSpineItem(this.readerModel.findNextChapterIndex()))
     }
-
     this.pagePrevious.setOnClickListener {
       this.jsAPI.scrollPrevious()
     }

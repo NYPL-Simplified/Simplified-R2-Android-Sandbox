@@ -17,7 +17,7 @@ window.addEventListener("load", function() { // on page load
 
 
 var handleClick = function(event) {
-    Android.handleClick(event.target.outerHTML)
+    Android.onClicked(event.target.outerHTML)
 };
 
 
@@ -58,13 +58,13 @@ var handleTouchEnd = function(event) {
         var position = (touch.screenX % availWidth) / availWidth;
         if (position <= 0.2) {
             console.log("LeftTapped");
-            Android.scrollLeft(false);
+            Android.onLeftTapped();
         } else if (position >= 0.8) {
             console.log("RightTapped");
-            Android.scrollRight(false);
+            Android.onRightTapped();
         } else {
             console.log("CenterTapped");
-            Android.centerTapped();
+            Android.onCenterTapped();
         }
         event.stopPropagation();
         event.preventDefault();

@@ -39,6 +39,32 @@ class ReaderViewModel : ViewModel() {
     }
   }
 
+  fun findNextChapterIndex(): Int {
+    val currentServer =
+      this.server.value ?: throw IllegalStateException("Server is not running!")
+
+    val currentIndex =
+      this.chapterIndex.value ?: 0
+    val newIndex =
+      (currentIndex + 1) % currentServer.publication.readingOrder.size
+
+    this.chapterIndex.postValue(newIndex)
+    return newIndex
+  }
+
+  fun findPreviousChapterIndex(): Int {
+    val currentServer =
+      this.server.value ?: throw IllegalStateException("Server is not running!")
+
+    val currentIndex =
+      this.chapterIndex.value ?: 0
+    val newIndex =
+      Math.max(0, currentIndex - 1) % currentServer.publication.readingOrder.size
+
+    this.chapterIndex.postValue(newIndex)
+    return newIndex
+  }
+
   private fun closeExistingServer() {
     val current = this.server.value
     current?.let { currentServer ->

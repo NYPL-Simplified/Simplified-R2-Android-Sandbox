@@ -25,6 +25,7 @@ class ReaderViewerFragment : Fragment() {
   private val logger =
     LoggerFactory.getLogger(ReaderViewerFragment::class.java)
 
+  private lateinit var controls: ViewGroup
   private lateinit var fileNext: Button
   private lateinit var filePrevious: Button
   private lateinit var jsAPI: ReaderJavascriptAPIType
@@ -44,14 +45,16 @@ class ReaderViewerFragment : Fragment() {
     val layout =
       inflater.inflate(R.layout.reader_viewer, container, false)
 
+    this.controls =
+      layout.findViewById(R.id.viewerControls)
     this.pagePrevious =
-      layout.findViewById(R.id.viewerPagePrevious)
+      this.controls.findViewById(R.id.viewerPagePrevious)
     this.pageNext =
-      layout.findViewById(R.id.viewerPageNext)
+      this.controls.findViewById(R.id.viewerPageNext)
     this.filePrevious =
-      layout.findViewById(R.id.viewerFilePrevious)
+      this.controls.findViewById(R.id.viewerFilePrevious)
     this.fileNext =
-      layout.findViewById(R.id.viewerFileNext)
+      this.controls.findViewById(R.id.viewerFileNext)
 
     this.webViewClient = ReaderWebViewClient()
     this.webChromeClient = ReaderWebChromeClient()

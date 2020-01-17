@@ -9,43 +9,53 @@
     android:id="@+id/viewerWebView"
     android:layout_width="0dp"
     android:layout_height="0dp"
-    app:layout_constraintBottom_toTopOf="@+id/viewerFilePrevious"
+    app:layout_constraintBottom_toTopOf="@+id/viewerControls"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintHorizontal_bias="1.0"
     app:layout_constraintStart_toStartOf="parent"
     app:layout_constraintTop_toTopOf="parent"
     app:layout_constraintVertical_bias="0.0" />
 
-  <Button
-    android:id="@+id/viewerFilePrevious"
-    android:layout_width="96dp"
+  <androidx.constraintlayout.widget.ConstraintLayout
+    android:id="@+id/viewerControls"
+    android:layout_width="0dp"
     android:layout_height="wrap_content"
-    android:text="@string/filePrevious"
-    app:layout_constraintBottom_toTopOf="@id/viewerPagePrevious"
-    app:layout_constraintStart_toStartOf="parent" />
-
-  <Button
-    android:id="@+id/viewerFileNext"
-    android:layout_width="96dp"
-    android:layout_height="wrap_content"
-    android:text="@string/fileNext"
-    app:layout_constraintBottom_toTopOf="@id/viewerPageNext"
-    app:layout_constraintEnd_toEndOf="parent" />
-
-  <Button
-    android:id="@+id/viewerPagePrevious"
-    android:layout_width="96dp"
-    android:layout_height="wrap_content"
-    android:text="@string/pagePrevious"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintStart_toStartOf="parent" />
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="parent">
 
-  <Button
-    android:id="@+id/viewerPageNext"
-    android:layout_width="96dp"
-    android:layout_height="wrap_content"
-    android:text="@string/pageNext"
-    app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent" />
+    <Button
+      android:id="@+id/viewerFilePrevious"
+      android:layout_width="96dp"
+      android:layout_height="wrap_content"
+      android:text="@string/filePrevious"
+      app:layout_constraintBottom_toTopOf="@id/viewerPagePrevious"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+      android:id="@+id/viewerFileNext"
+      android:layout_width="96dp"
+      android:layout_height="wrap_content"
+      android:text="@string/fileNext"
+      app:layout_constraintBottom_toTopOf="@id/viewerPageNext"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+      android:id="@+id/viewerPagePrevious"
+      android:layout_width="96dp"
+      android:layout_height="wrap_content"
+      android:text="@string/pagePrevious"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+      android:id="@+id/viewerPageNext"
+      android:layout_width="96dp"
+      android:layout_height="wrap_content"
+      android:text="@string/pageNext"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+  </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

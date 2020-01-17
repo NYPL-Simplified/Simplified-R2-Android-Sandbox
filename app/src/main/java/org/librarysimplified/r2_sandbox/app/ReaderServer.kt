@@ -8,6 +8,8 @@ import org.readium.r2.streamer.server.Server
 import org.slf4j.LoggerFactory
 import java.io.File
 import java.io.IOException
+import java.lang.IllegalArgumentException
+import java.lang.IllegalStateException
 import java.net.ServerSocket
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -117,16 +119,18 @@ class ReaderServer private constructor(
   }
 
   override fun locationOfSpineItem(index: Int): String {
+    require(index < this.publication.readingOrder.size) {
+      "Only indices in the range [0, ${this.publication.readingOrder.size}) are valid"
+    }
+
     return buildString {
       this.append("http://127.0.0.1:")
       this.append(this@ReaderServer.port)
       this.append(this@ReaderServer.epubFileName)
 
       val publication = this@ReaderServer.publication
-      val firstItem = publication.readingOrder[index].href
-      if (firstItem != null) {
-        this.append(firstItem)
-      }
+      this.append(publication.readingOrder[index].href
+        ?: throw IllegalStateException("Link to chapter ${index} is not present"))
     }
   }
 }

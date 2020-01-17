@@ -27,7 +27,7 @@ failed.
 #### Start An Embedded HTTP Server
 
 The Readium 2 API assumes that content from an EPUB file will be served
-to platform `WebView` via an embedded web server ([NanoHTTPD](https://github.com/NanoHttpd/nanohttpd/).
+to a platform `WebView` via an embedded web server ([NanoHTTPD](https://github.com/NanoHttpd/nanohttpd/)).
 
 The [Server](https://github.com/readium/r2-streamer-kotlin/blob/develop/r2-streamer/src/main/java/org/readium/r2/streamer/server/Server.kt)
 class included as part of the Readium 2 Streamer module must be started:

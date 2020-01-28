@@ -1,5 +1,6 @@
 package org.librarysimplified.r2_sandbox.app
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MotionEvent
@@ -65,6 +66,12 @@ class ReaderViewerFragment : Fragment() {
     this.webView.webChromeClient = this.webChromeClient
     this.webView.isVerticalScrollBarEnabled = false
     this.webView.isHorizontalScrollBarEnabled = false
+
+    /*
+     * Enable WebView remote debugging.
+     */
+
+    WebView.setWebContentsDebuggingEnabled(BuildConfig.DEBUG)
 
     /*
      * Disable manual scrolling on the web view. Scrolling is controlled via the javascript API.

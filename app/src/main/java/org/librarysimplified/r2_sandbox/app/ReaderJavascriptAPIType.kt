@@ -8,38 +8,34 @@ import androidx.annotation.UiThread
 
 interface ReaderJavascriptAPIType {
 
-  /**
-   * Scroll to the next page.
-   */
+  /** Scroll to the next page. */
 
   @UiThread
   fun scrollNext()
 
-  /**
-   * Scroll to the previous page.
-   */
+  /** Scroll to the previous page. */
 
   @UiThread
   fun scrollPrevious()
 
-  /**
-   * Set the font family.
-   */
-
   @UiThread
   fun setFontFamily(value: String)
-
-  /**
-   * Set the text size.
-   */
 
   @UiThread
   fun setTextSize(value: Int)
 
-  /**
-   * Set the text alignment.
-   */
-
   @UiThread
   fun setTextAlign(value: String)
+
+  @UiThread
+  fun setPageMargin(value: Double)
+
+  @UiThread
+  fun setLineHeight(value: Double)
+
+  @UiThread
+  fun setLetterSpacing(value: Double)
+
+  @UiThread
+  fun setWordSpacing(value: Double)
 }

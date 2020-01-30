@@ -38,11 +38,28 @@ class ReaderJavascriptAPI(
 
   override fun setTextSize(value: Int) {
     // Note: The js property name is 'fontSize' not 'textSize'
-    setUserProperty("fontSize", "$value%")
+    setUserProperty("fontSize", "${value}%")
   }
 
   override fun setTextAlign(value: String) {
     setUserProperty("textAlign", value)
+  }
+
+  override fun setPageMargin(value: Double) {
+    // Note: The js property name is 'pageMargins' plural
+    setUserProperty("pageMargins", "$value")
+  }
+
+  override fun setLineHeight(value: Double) {
+    setUserProperty("lineHeight", "$value")
+  }
+
+  override fun setLetterSpacing(value: Double) {
+    setUserProperty("letterSpacing", "${value}em")
+  }
+
+  override fun setWordSpacing(value: Double) {
+    setUserProperty("wordSpacing", "${value}rem")
   }
 
   @UiThread

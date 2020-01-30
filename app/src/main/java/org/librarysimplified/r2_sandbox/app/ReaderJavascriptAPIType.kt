@@ -38,4 +38,7 @@ interface ReaderJavascriptAPIType {
 
   @UiThread
   fun setWordSpacing(value: Double)
+
+  @UiThread
+  fun setTheme(value: ReaderTheme)
 }
